@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: passwordless-spring-redis
+metadata:
+  template: passwordless-spring-redis@1.0.0
+infra:
+    provider: "terraform"
+    path: "./infra"
+services:
+  application:
+    project: .
+    language: java
+    host: appservice
