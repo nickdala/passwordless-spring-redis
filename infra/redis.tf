@@ -39,3 +39,13 @@ resource "azurerm_redis_cache_access_policy_assignment" "app_user" {
   object_id          = azurerm_user_assigned_identity.app_service_identity.principal_id
   object_id_alias    = azurerm_user_assigned_identity.app_service_identity.principal_id
 }
+
+
+resource "azurerm_redis_cache_access_policy_assignment" "appservice_user" {
+  name               = "appserviceuser"
+  redis_cache_id     = azurerm_redis_cache.cache.id
+  access_policy_name = "Data Contributor"
+  object_id          = azurerm_linux_web_app.application.identity[0].principal_id
+  object_id_alias    = azurerm_linux_web_app.application.identity[0].principal_id
+}
+

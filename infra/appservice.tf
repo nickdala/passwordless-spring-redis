@@ -24,7 +24,7 @@ resource "azurerm_linux_web_app" "application" {
   service_plan_id     = azurerm_service_plan.application.id
 
   identity {
-    type = "UserAssigned"
+    type = "SystemAssigned, UserAssigned"
     identity_ids = [
         azurerm_user_assigned_identity.app_service_identity.id
     ]
