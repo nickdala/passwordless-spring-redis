@@ -1,4 +1,48 @@
-# passwordless-spring-redis
+# Azure Cache for Redis with Microsoft Entra ID in a Spring Boot Application
+
+This project demonstrates how to use [Azure Cache for Redis](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-overview) with [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/fundamentals/whatis) in a Spring Boot application. The application is a simple REST API that stores and retrieves a name from a Redis cache. The application is deployed to [Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/overview).
+
+A managed identity is used to authenticate the application to Azure Cache for Redis. The managed identity is created and assigned the `Data Contributor` role. The application uses the managed identity to authenticate to Azure Cache for Redis.
+
+![Managed Identity](./img/managed-identity.png)
+
+The Client ID and the Object (principal) ID of the managed identity are used to configure the application to authenticate to Azure Cache for Redis.
+
+![App Service User Assigned Managed Identity](./img/app-service-user-assigned-identity.png)
+
+The pom.xml file includes the following dependencies:
+
+```xml
+<dependency>
+	<groupId>com.azure.spring</groupId>
+	<artifactId>spring-cloud-azure-starter-data-redis-lettuce</artifactId>
+</dependency>
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-redis<artifactId>
+</dependency>
+```
+
+The application.yaml file includes the following configuration:
+
+```yaml
+spring:
+  application:
+    name: redis-passwordless
+  data:
+    redis:
+      host: ${AZURE_CACHE_REDIS_HOST}
+      port: 6380
+      username: ${AZURE_CACHE_REDIS_USERNAME}
+      ssl:
+        enabled: true
+      azure:
+        passwordless-enabled: true
+        credential:
+          client-id: ${AZURE_CACHE_REDIS_CLIENT_ID}
+```
+
+The **AZURE_CACHE_REDIS_USERNAME** is set to the Object ID of the managed identity. The **AZURE_CACHE_REDIS_CLIENT_ID** is set to the Client ID of the managed identity.
 
 ## Deploy
 
@@ -79,8 +123,18 @@ For example:
 curl https://app-nick-redis.azurewebsites.net/nick
 ```
 
+## Verify Azure Cache for Redis
+
+![Redis-Console](./img/redis-console.png)
+
 ## Clean up
 
 ```
 azd down --purge --force
 ```
+
+## Resources
+
+- [Enable Microsoft Entra ID authentication on your cache](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-azure-active-directory-for-authentication)
+- [Spring Boot Azure Redis Sample](https://github.com/Azure-Samples/azure-spring-boot-samples/tree/main/cache/spring3-sample/spring-cloud-azure-redis-sample-passwordless)
+- [Reliable Web App for Java](https://github.com/Azure/reliable-web-app-pattern-java)

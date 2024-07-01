@@ -24,7 +24,7 @@ resource "azurerm_linux_web_app" "application" {
   service_plan_id     = azurerm_service_plan.application.id
 
   identity {
-    type = "SystemAssigned, UserAssigned"
+    type = "UserAssigned"
     identity_ids = [
         azurerm_user_assigned_identity.app_service_identity.id
     ]
@@ -44,6 +44,7 @@ resource "azurerm_linux_web_app" "application" {
     ApplicationInsightsAgent_EXTENSION_VERSION = "~3"
     AZURE_CACHE_REDIS_HOST = azurerm_redis_cache.cache.hostname
     AZURE_CACHE_REDIS_USERNAME = azurerm_user_assigned_identity.app_service_identity.principal_id
+    AZURE_CACHE_REDIS_CLIENT_ID = azurerm_user_assigned_identity.app_service_identity.client_id
   }
 
   logs {

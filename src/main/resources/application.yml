@@ -10,3 +10,5 @@ spring:
         enabled: true
       azure:
         passwordless-enabled: true
+        credential:
+          client-id: ${AZURE_CACHE_REDIS_CLIENT_ID}
