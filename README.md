@@ -33,7 +33,6 @@ spring:
     redis:
       host: ${AZURE_CACHE_REDIS_HOST}
       port: 6380
-      username: ${AZURE_CACHE_REDIS_USERNAME}
       ssl:
         enabled: true
       azure:
