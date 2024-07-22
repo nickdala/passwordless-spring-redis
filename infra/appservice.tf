@@ -43,7 +43,6 @@ resource "azurerm_linux_web_app" "application" {
     APPLICATIONINSIGHTS_CONNECTION_STRING = azurerm_application_insights.app_insights.connection_string
     ApplicationInsightsAgent_EXTENSION_VERSION = "~3"
     AZURE_CACHE_REDIS_HOST = azurerm_redis_cache.cache.hostname
-    AZURE_CACHE_REDIS_USERNAME = azurerm_user_assigned_identity.app_service_identity.principal_id
     AZURE_CACHE_REDIS_CLIENT_ID = azurerm_user_assigned_identity.app_service_identity.client_id
   }
 
