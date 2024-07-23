@@ -43,6 +43,13 @@ spring:
 
 The **AZURE_CACHE_REDIS_USERNAME** is set to the Object ID of the managed identity. The **AZURE_CACHE_REDIS_CLIENT_ID** is set to the Client ID of the managed identity.
 
+## Prerequisites
+
+1. [Java 17](https://learn.microsoft.com//java/openjdk/download)
+1. [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli-macos)
+1. [Azure Dev CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+1. [Terraform](https://developer.hashicorp.com/terraform/downloads)
+
 ## Deploy
 
 1. Log in to Azure
