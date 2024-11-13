@@ -59,6 +59,12 @@ Before deploying, you must be authenticated to Azure and have the appropriate su
 az login
 ```
 
+If you have multiple tenants, you can use the following command to log into the tenant:
+
+```
+az login --tenant <tenant-id>
+```
+
 Set the subscription to the one you want to use (you can use az account list to list available subscriptions):
 
 ```
@@ -73,6 +79,12 @@ Use the next command to login with the Azure Dev CLI (AZD) tool:
 
 ```
 azd auth login
+```
+
+If you have multiple tenants, you can use the following command to log into the tenant:
+
+```
+azd auth login --tenant-id <tenant-id>
 ```
 
 2. Create a new environment
@@ -143,4 +155,4 @@ azd down --purge --force
 
 - [Enable Microsoft Entra ID authentication on your cache](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-azure-active-directory-for-authentication)
 - [Spring Boot Azure Redis Sample](https://github.com/Azure-Samples/azure-spring-boot-samples/tree/main/cache/spring3-sample/spring-cloud-azure-redis-sample-passwordless)
-- [Reliable Web App for Java](https://github.com/Azure/reliable-web-app-pattern-java)
+- [Modern Web App for Java](https://github.com/Azure/modern-web-app-pattern-java)
